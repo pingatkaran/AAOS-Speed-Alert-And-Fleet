@@ -1,0 +1,31 @@
+[versions]
+agp = "8.8.0"
+appAutomotive = "1.4.0-alpha01"
+car = "1.0.0-alpha7"
+kotlin = "1.9.24"
+coreKtx = "1.15.0"
+appcompat = "1.7.0"
+material = "1.12.0"
+activity = "1.10.0"
+firebaseBom = "33.9.0"
+constraintlayout = "2.2.0"
+firebaseMessagingKtx = "24.1.0"
+
+[libraries]
+androidx-app-automotive = { module = "androidx.car.app:app-automotive", version.ref = "appAutomotive" }
+androidx-car = { module = "androidx.car:car", version.ref = "car" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+google-services = { id = "com.google.gms.google-services", version = "4.4.0" }
+

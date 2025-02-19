@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "183290492669",
+    "firebase_url": "https://aaos-assignment-default-rtdb.firebaseio.com",
+    "project_id": "aaos-assignment",
+    "storage_bucket": "aaos-assignment.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183290492669:android:4a6d3ea82f5be2b53a7094",
+        "android_client_info": {
+          "package_name": "com.app.drivealert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDvqOCU2VrSkeNdFUzONnI7GvESicOQh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183290492669:android:440ab3b68d5e88c33a7094",
+        "android_client_info": {
+          "package_name": "com.app.fleetapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDvqOCU2VrSkeNdFUzONnI7GvESicOQh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
