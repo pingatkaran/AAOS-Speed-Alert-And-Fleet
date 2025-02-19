@@ -117,7 +117,7 @@ class SpeedService : CarAppService() {
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(notificationId, notification.build())
-
+        // Here We can call the Cloud Function to notify the Fleet company with Rider details.
     }
 
     override fun onDestroy() {
