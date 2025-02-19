@@ -1,7 +1,7 @@
 # AAOS Speed Alert System
 
 ## Overview
-I have developed an **Android Automotive OS (AAOS) project** designed to **alert car riders** when they exceed a predefined speed limit. This threshold is set by the **fleet company** to ensure safe driving practices.
+I have developed an **Android Automotive OS (AAOS) project** designed to **alert car riders** when they exceed a predefined speed limit. 
 
 ## Features
 ### **1. Main Activity**
