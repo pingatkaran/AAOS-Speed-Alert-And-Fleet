@@ -29,8 +29,13 @@ I have developed an **Android Automotive OS (AAOS) project** designed to **alert
 - This enhancement will enable **rental companies to receive instant speed alerts** whenever a vehicle exceeds its limit.
 - The repository will continue to receive updates as new features are implemented.
 
+
 ## Video
-![Video Preview](video.mov)
+
+<video width="600" controls>
+  <source src="video.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ---
 Stay tuned for future updates! 🚀
