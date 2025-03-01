@@ -1,7 +1,7 @@
 # AAOS Speed Alert System
 
 ## Overview
-I have developed an **Android Automotive OS (AAOS) project** designed to **alert car riders** when they exceed a predefined speed limit. This threshold is set by the **fleet company** to ensure safe driving practices.
+I have developed an **Android Automotive OS (AAOS) project** designed to **alert car riders** when they exceed a predefined speed limit. 
 
 ## Features
 ### **1. Main Activity**
@@ -12,9 +12,9 @@ I have developed an **Android Automotive OS (AAOS) project** designed to **alert
 - Upon submitting these details, the system starts a background service that **monitors vehicle speed** and alerts the driver when they exceed the threshold.
 - Comments have been added in the code where notifications to the **fleet company** can be triggered.
 
-### **2. Fleet Management with FleepApp**
-- I have dedicated additional effort to integrating this project with a mobile application called **FleepApp** (available in this repository).
-- **FleepApp allows fleet managers to add and manage multiple vehicles**.
+### **2. Fleet Management with FleetApp**
+- I have dedicated additional effort to integrating this project with a mobile application called **FleetApp** (available in this repository).
+- **FleetApp allows fleet managers to add and manage multiple vehicles**.
 
 ### **3. Car Selection and Limit Management**
 - A new activity, **CarListActivity**, has been introduced in the AAOS project.
@@ -25,7 +25,7 @@ I have developed an **Android Automotive OS (AAOS) project** designed to **alert
 
 ## Future Enhancements
 ### **Integrating Firebase Cloud Functions**
-- The next major improvement will involve using **Firebase Cloud Functions** to facilitate real-time communication between **AAOS and FleepApp**.
+- The next major improvement will involve using **Firebase Cloud Functions** to facilitate real-time communication between **AAOS and FleetApp**.
 - This enhancement will enable **rental companies to receive instant speed alerts** whenever a vehicle exceeds its limit.
 - The repository will continue to receive updates as new features are implemented.
 
