@@ -31,8 +31,7 @@ I have developed an **Android Automotive OS (AAOS) project** designed to **alert
 
 ## Video
 
-
-![Video Preview](video.mp4)
+[![Watch the video](https://img.youtube.com/vi/6lrdkMmy3V0/maxresdefault.jpg)](https://www.youtube.com/watch?v=6lrdkMmy3V0)
 
 
 
