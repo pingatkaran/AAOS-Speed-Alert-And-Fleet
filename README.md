@@ -30,10 +30,11 @@ I have developed an **Android Automotive OS (AAOS) project** designed to **alert
 - The repository will continue to receive updates as new features are implemented.
 
 ## Video
-<video width="600" controls>
-  <source src="video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
+
+![Video Preview](video.mp4)
+
+
 
 ---
 Stay tuned for future updates! 🚀
