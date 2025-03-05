@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
     private val carsRef = database.getReference("cars")
-    private lateinit var fcmTokenHelper: FcmTokenHelper
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         setupListeners()
         loadCars()
-        fcmTokenHelper = FcmTokenHelper(this)
 
         FirebaseMessaging.getInstance().subscribeToTopic("speed_alert")
             .addOnCompleteListener { task ->
@@ -42,14 +40,6 @@ class MainActivity : AppCompatActivity() {
                     Log.e("FCM", "Subscription failed")
                 }
             }
-        fcmTokenHelper.generateAccessToken(
-            onSuccess = { token ->
-                Log.d("FCM", "Access Token: $token")
-            },
-            onError = { error ->
-                Log.e("FCM", "Error: ${error.message}")
-            }
-        )
     }
 
 
@@ -87,10 +77,5 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Failed to load cars", Toast.LENGTH_SHORT).show()
             }
         })
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        fcmTokenHelper.clear() // Cleanup coroutines
     }
 }
