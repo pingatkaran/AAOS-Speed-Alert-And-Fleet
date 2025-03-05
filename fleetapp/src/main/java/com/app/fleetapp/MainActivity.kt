@@ -1,5 +1,6 @@
 package com.app.fleetapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.messaging.FirebaseMessaging
+import java.io.FileInputStream
+import com.google.auth.oauth2.GoogleCredentials
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
     private val carsRef = database.getReference("cars")
+    private lateinit var fcmTokenHelper: FcmTokenHelper
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         setupListeners()
         loadCars()
+        fcmTokenHelper = FcmTokenHelper(this)
+
         FirebaseMessaging.getInstance().subscribeToTopic("speed_alert")
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -38,7 +46,17 @@ class MainActivity : AppCompatActivity() {
                     Log.e("FCM", "Subscription failed")
                 }
             }
+        fcmTokenHelper.generateAccessToken(
+            onSuccess = { token ->
+                Log.d("FCM", "Access Token: $token")
+                // Use token to send FCM message
+            },
+            onError = { error ->
+                Log.e("FCM", "Error: ${error.message}")
+            }
+        )
     }
+
 
     private fun initializeViews() {
         recyclerView = findViewById(R.id.recyclerView)
@@ -74,5 +92,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Failed to load cars", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fcmTokenHelper.clear() // Cleanup coroutines
     }
 }
