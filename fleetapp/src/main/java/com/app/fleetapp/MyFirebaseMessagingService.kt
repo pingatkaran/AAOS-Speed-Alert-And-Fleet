@@ -32,7 +32,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun showSpeedAlert(speed: Double, limit: Int, driver: String) {
         val channelId = "fleet_channel"
-        createNotificationChannel(channelId) // Ensure channel exists
+        createNotificationChannel(channelId)
 
         val notification = NotificationCompat.Builder(this, channelId)
             .setContentTitle("Alert: $driver is on High Speed")
@@ -76,7 +76,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String) {
-        Log.d("FCM", "New token: $token")
         FirebaseMessaging.getInstance().subscribeToTopic("fleet_notifications")
     }
 }

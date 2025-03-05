@@ -23,8 +23,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -39,8 +37,6 @@ class SpeedService : CarAppService() {
     companion object {
         private const val KM_MULTIPLIER = 3.59999987F // Use to convert miles to kms
         private const val notificationId = 1234
-        private const val FCM_SERVER_KEY =
-            "ya29.c.c0ASRK0Ga0_SVrxWfnl27tvblxZIyI_R0nYCvURKzK9FXjI0itped3s8uEbIvm-K6kqA21vl327l_e8u-y-y9GiUXcbxUw_fRYN_xxV-jfwGg3kqj6ny8hiCE3pV7WVIP3WtqIYEEwqtmJ3O_oRJUU9MfcNVygPcokUSlh0e-svEGD6QH1IZyF20gz-KV8ObSparD6LnRCf9Oamk2n31HzLD2RhasVGF3DVI2VWLe0QOhLCqiH2zoNIvnUH-sjJ5Wr0wvvlyMfDPZbXXJ5WkgeROwE46q1FbxAPfQKfMEP87w_6qaqZqTvQLmhPzF7Xb7zo3l88huwU_42uv1d-Fseca-hdm9CPUbDtRX0KusbWox0rxmA5oCIgdtzG385P7i6e2J5y-YQmetzq9qjFFWp1x20R8mbYOm3fc7uMWt-Xl-4-M_ntMjgBjfaXi7OkUivJvR31V5s9iSfZBqX0S4qJdriJ45xp206kWilwv-oF608XSXz5ZiMrhlY9jYdcRzqc9tY-b_y3JQ_fXWcnRmOfM6uMncpQ6cQ_S_yj5Xhna6htIfjUUXs0s4jYynM096WhpcixyY9jiX8yq2qegmXpets4_kWRvxwzjdBlSjctix3IJ1r-qpcx0ZxWJaXi140h_heV68dtmzRmSMhcFI7wWaQ3JO2O1B017WQmQrBfrROlfb0_vfzV8d-XISgwMyFxoYIiZwMj9X4iS9XFeJFae5bc-UWBd4MSZbXoMbU8_S2svZ70hphXZZfx4jtlecpORcup6RmVzwr6VYv7kaUtt2IZiuZZ9a8BXMiiXzM4wMr9Qlq7_Rk0h2hXwiMlJ2Jnaj4es1lfpywYcRvz8MJvIOtfX0U90kRSflYx-v9rFMO24auF4mazFkV1Vui6-0YQi5I01gJzlfrnbF0RXaxyqxZfvmR0QJ4Q0_8msv888W1--WuXsJ4v-j909vcxrxO0UpsFk1tWorBjFtfst6dh9cVIn9FZ4zovQjJ3iXvtZwWm-U8110QVu6" // Replace with your actual server key
         private const val FLEET_TOPIC = "/topics/fleet_notifications"
     }
 
@@ -101,7 +97,6 @@ class SpeedService : CarAppService() {
 
     private fun sendFleetNotification(currentSpeed: Float) {
         try {
-            // Prepare notification data
             val notificationData = JSONObject().apply {
                 put("speed", currentSpeed.toString())
                 put("speedLimit", speedLimit.toString())
@@ -126,11 +121,10 @@ class SpeedService : CarAppService() {
     private fun sendFCMNotificationViaHttp(notificationData: JSONObject) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                // 1. Get access token
                 val accessToken = getFcmAccessToken()
 
-                // 2. Create proper FCM v1 request
-                val url = URL("https://fcm.googleapis.com/v1/projects/aaos-assignment/messages:send")
+                val url =
+                    URL("https://fcm.googleapis.com/v1/projects/aaos-assignment/messages:send")
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "POST"
 
@@ -138,23 +132,15 @@ class SpeedService : CarAppService() {
                 connection.setRequestProperty("Content-Type", "application/json")
                 connection.doOutput = true
 
-                // 3. Build v1-compatible payload
                 val payload = JSONObject().apply {
                     put("message", JSONObject().apply {
                         put("topic", "fleet_notifications") // Remove /topics/ prefix
                         put("data", notificationData)
                     })
                 }
-
-                Log.e("TAG", "payload: ${payload}", )
-                Log.e("TAG", "accessToken: ${accessToken}", )
-
-                // 4. Send request
                 connection.outputStream.use { os ->
                     os.write(payload.toString().toByteArray())
                 }
-
-                // 5. Check response
                 when (connection.responseCode) {
                     200 -> Log.d("FCM", "Notification sent successfully")
                     else -> Log.e("FCM", "Error: ${connection.responseMessage}")
@@ -166,9 +152,9 @@ class SpeedService : CarAppService() {
     }
 
     private suspend fun getFcmAccessToken(): String {
-        // Get from secure storage (DO NOT HARDCODE)
-        val credentials = GoogleCredentials.fromStream(applicationContext.assets.open("service_account.json"))
-            .createScoped(listOf("https://www.googleapis.com/auth/cloud-platform"))
+        val credentials =
+            GoogleCredentials.fromStream(applicationContext.assets.open("service_account.json"))
+                .createScoped(listOf("https://www.googleapis.com/auth/cloud-platform"))
 
         return credentials.refreshAccessToken().tokenValue
     }

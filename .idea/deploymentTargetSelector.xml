@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="automotive">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-02-19T10:00:28.721283Z">
+        <DropdownSelection timestamp="2025-03-05T11:40:57.185124Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/karan/.android/avd/Automotive_1080p_landscape_API_33.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=24291FDF6004VG" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -15,7 +15,7 @@
       </SelectionState>
       <SelectionState runConfigName="fleetapp">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-02-19T09:41:09.913560Z">
+        <DropdownSelection timestamp="2025-03-05T10:22:53.337416Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/Users/karan/.android/avd/Automotive_1080p_landscape_API_33.avd" />

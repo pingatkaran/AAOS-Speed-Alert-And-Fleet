@@ -32,9 +32,8 @@ class FcmTokenHelper(private val context: Context) {
 
     private suspend fun getAccessToken(): String = withContext(Dispatchers.IO) {
         try {
-            // Load service account JSON from assets
             val inputStream: InputStream = context.assets.open("service_account.json")
-            
+
             GoogleCredentials
                 .fromStream(inputStream)
                 .createScoped(listOf("https://www.googleapis.com/auth/cloud-platform"))

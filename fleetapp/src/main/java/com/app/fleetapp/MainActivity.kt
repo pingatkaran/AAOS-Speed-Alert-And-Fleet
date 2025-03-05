@@ -1,6 +1,5 @@
 package com.app.fleetapp
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,9 +13,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.messaging.FirebaseMessaging
-import java.io.FileInputStream
-import com.google.auth.oauth2.GoogleCredentials
-import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         fcmTokenHelper.generateAccessToken(
             onSuccess = { token ->
                 Log.d("FCM", "Access Token: $token")
-                // Use token to send FCM message
             },
             onError = { error ->
                 Log.e("FCM", "Error: ${error.message}")
