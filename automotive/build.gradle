@@ -52,5 +52,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database.ktx)
     implementation libs.firebase.messaging.ktx
-    implementation("com.google.auth:google-auth-library-oauth2-http:1.18.0")
+    implementation(libs.google.auth.library.oauth2.http)
+    implementation(libs.aws.android.sdk.core)
+    implementation(libs.aws.android.sdk.sns)
 }

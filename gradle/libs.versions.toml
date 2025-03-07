@@ -1,8 +1,10 @@
 [versions]
 agp = "8.8.0"
 appAutomotive = "1.4.0-alpha01"
+awsAndroidSdkCore = "2.60.0"
 car = "1.0.0-alpha7"
 firebaseMessagingKtx = "24.1.0"
+googleAuthLibraryOauth2Http = "1.18.0"
 kotlin = "1.9.24"
 coreKtx = "1.15.0"
 appcompat = "1.7.0"
@@ -15,7 +17,10 @@ androidx-app-automotive = { module = "androidx.car.app:app-automotive", version.
 androidx-car = { module = "androidx.car:car", version.ref = "car" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+aws-android-sdk-core = { module = "com.amazonaws:aws-android-sdk-core", version.ref = "awsAndroidSdkCore" }
+aws-android-sdk-sns = { module = "com.amazonaws:aws-android-sdk-sns", version.ref = "awsAndroidSdkCore" }
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
+google-auth-library-oauth2-http = { module = "com.google.auth:google-auth-library-oauth2-http", version.ref = "googleAuthLibraryOauth2Http" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx" }
