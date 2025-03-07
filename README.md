@@ -27,7 +27,11 @@ I have developed an **Android Automotive OS (AAOS) project** designed to **alert
 ### **4. Fleet Notifications via Push Notifications** ✅  
 - The **FleetApp** will now receive **push notifications** whenever a rider **exceeds the speed limit**.  
 - The system uses **Firebase Cloud Messaging (FCM)** and **AWS SNS** as communication channels.  
-- **Notifications include rider details**, enabling **fleet managers to take immediate action**.  
+- **Notifications include rider details**, enabling **fleet managers to take immediate action**.
+
+## File
+
+[SpeedService.kt](https://github.com/pingatkaran/AAOS-Speed-Alert-And-Fleet/blob/main/automotive/src/main/java/com/app/drivealert/SpeedService.kt)
 
 ## Video  
 
