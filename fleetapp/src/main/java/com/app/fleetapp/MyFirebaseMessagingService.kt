@@ -1,46 +1,81 @@
 package com.app.fleetapp
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
+import android.provider.Settings
+import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        remoteMessage.data?.let { data ->
-            val title = data["title"] ?: "Speed Alert 🚗"
-            val body = data["body"] ?: "Speed limit exceeded!"
-            val speedLimit = data["limit"] ?: "Unknown"
-            val name = data["name"] ?: "Unknown Driver"
+        Log.d("FCM", "Message received: ${remoteMessage.data}")
 
-            showNotification(title, body, speedLimit, name)
+        remoteMessage.data.let { data ->
+            data["speed"]?.toDoubleOrNull()?.let { speed ->
+                data["speedLimit"]?.toIntOrNull()?.let { limit ->
+                    data["driverName"]?.let { driver ->
+                        showSpeedAlert(speed, limit, driver)
+                    }
+                }
+            }
         }
     }
 
-    private fun showNotification(title: String, body: String, limit: String, name: String) {
-        val channelId = "speed_alerts"
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, "Speed Alerts", NotificationManager.IMPORTANCE_HIGH).apply {
-                description = "Alerts when speed limit is exceeded"
-                enableVibration(true)
-            }
-            notificationManager.createNotificationChannel(channel)
-        }
+    private fun showSpeedAlert(speed: Double, limit: Int, driver: String) {
+        val channelId = "fleet_channel"
+        createNotificationChannel(channelId)
 
         val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle(title)
-            .setContentText("$body\nLimit: $limit km/h\nDriver: $name")
+            .setContentTitle("Alert: $driver is on High Speed")
+            .setContentText("Current speed: ${speed}km/h (Limit: $limit km/h)")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
 
-        notificationManager.notify(9999, notification)
+        val notificationManager = NotificationManagerCompat.from(this)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestNotificationPermission()
+                return
+            }
+        }
+
+        notificationManager.notify(System.currentTimeMillis().toInt(), notification)
+    }
+
+    private fun requestNotificationPermission() {
+        val permissionIntent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+            putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // Ensure it starts correctly
+        }
+        startActivity(permissionIntent)
+    }
+
+    private fun createNotificationChannel(channelId: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Fleet Alerts"
+            val descriptionText = "Notifications for speed alerts"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    override fun onNewToken(token: String) {
+        FirebaseMessaging.getInstance().subscribeToTopic("fleet_notifications")
     }
 }

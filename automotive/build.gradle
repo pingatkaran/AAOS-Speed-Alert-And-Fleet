@@ -34,6 +34,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -48,4 +51,8 @@ dependencies {
     implementation files('libs/android.car.jar')
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database.ktx)
+    implementation libs.firebase.messaging.ktx
+    implementation(libs.google.auth.library.oauth2.http)
+    implementation(libs.aws.android.sdk.core)
+    implementation(libs.aws.android.sdk.sns)
 }

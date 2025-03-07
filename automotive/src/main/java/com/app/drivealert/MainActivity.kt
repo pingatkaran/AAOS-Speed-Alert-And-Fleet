@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var nameEditText: EditText
     private lateinit var limitEditText: EditText
@@ -53,6 +54,8 @@ class MainActivity : AppCompatActivity() {
             checkPermissionsAndStartService()
         }
     }
+
+
 
     private fun checkPermissionsAndStartService() {
         val allGranted = Constant.permissions.all {

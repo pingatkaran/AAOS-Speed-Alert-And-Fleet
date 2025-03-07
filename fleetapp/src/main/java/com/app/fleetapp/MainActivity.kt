@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val carsRef = database.getReference("cars")
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         setupListeners()
         loadCars()
+
         FirebaseMessaging.getInstance().subscribeToTopic("speed_alert")
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
+
 
     private fun initializeViews() {
         recyclerView = findViewById(R.id.recyclerView)
